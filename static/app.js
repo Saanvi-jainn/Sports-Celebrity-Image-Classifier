@@ -63,7 +63,7 @@ function init() {
             },
             error: function(err) {
                 console.error("Error:", err);
-                $("#error").show(); /
+                $("#error").show(); 
             }
         });
     });
