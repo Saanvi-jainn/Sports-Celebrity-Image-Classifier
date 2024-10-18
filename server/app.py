@@ -13,23 +13,18 @@ def index():
 
 @app.route('/classify_image', methods=['POST'])
 def classify_image():
-    
-    # print("Received request:", request.data)
-    
-    # Get JSON data
+     
     data = request.get_json()
     
-    # print("Received JSON data:", data)  # Log parsed JSON data
 
     if not data or 'image_data' not in data:
-        # print("No image data provided or invalid request")  # Log missing data error
         return jsonify({"error": "No image data provided"}), 400
 
     image_data = data['image_data']
     try:
         response = jsonify(util.classify_image(image_data))
     except Exception as e:
-        print(f"Error during classification: {e}")  # Log any errors during processing
+        print(f"Error during classification: {e}")  
         return jsonify({"error": "Classification error"}), 500
 
     response.headers.add('Access-Control-Allow-Origin', '*')

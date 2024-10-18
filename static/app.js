@@ -2,7 +2,7 @@ Dropzone.autoDiscover = false;
 
 function init() {
     let dz = new Dropzone("#dropzone", {
-        url: "/classify_image", // Updated URL
+        url: "/classify_image",
         maxFiles: 1,
         addRemoveLinks: true,
         dictDefaultMessage: "Drop an image here or click to upload",
@@ -10,24 +10,22 @@ function init() {
     });
     
     dz.on("addedfile", function() {
-        // Ensure only one file is uploaded
         if (dz.files[1] != null) {
             dz.removeFile(dz.files[0]);        
         }
     });
 
     dz.on("complete", function (file) {
-        let imageData = file.dataURL; // This should be like "data:image/jpeg;base64,<base64_data>"
-        console.log("Sending image data:", imageData); // Log it for debugging
+        let imageData = file.dataURL; 
+        console.log("Sending image data:", imageData); 
 
-        var url = "/classify_image"; // Ensure it points to the same path
+        var url = "/classify_image"; 
 
-        // Use AJAX to send the base64 data to the server
         $.ajax({
             type: "POST",
             url: url,
-            contentType: "application/json", // Ensure the content type is set to JSON
-            data: JSON.stringify({ image_data: imageData }), // Stringify the JSON object
+            contentType: "application/json", 
+            data: JSON.stringify({ image_data: imageData }), 
             success: function(data) {
                 console.log(data);
                 if (!data || data.length == 0) {
@@ -65,7 +63,7 @@ function init() {
             },
             error: function(err) {
                 console.error("Error:", err);
-                $("#error").show(); // Show an error message if the request fails
+                $("#error").show(); /
             }
         });
     });
