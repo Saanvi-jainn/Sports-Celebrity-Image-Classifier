@@ -2,9 +2,8 @@ numpy
 pandas
 matplotlib
 seaborn
-base64
 flask
 opencv-python
 PyWavelets
 joblib
-sklearn
+scikit-learn
